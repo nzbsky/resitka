@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Парафія села Решітка</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://example.com/your-church-image.jpg'); /* ЗАМІНІТЬ ЦЕ ПОСИЛАННЯ НА ВАШЕ ФОТО */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1 {
+            color: #5a3921;
+            margin: 0;
+        }
+
+        .service-times {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f9f3e9;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #5a3921;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .service-item {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: white;
+            border-left: 4px solid #8b6b4a;
+        }
+
+        .service-day {
+            font-weight: bold;
+            color: #5a3921;
+        }
+
+        .service-time {
+            margin-left: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #ddd;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="content">
+        <header>
+            <h1>Парафія села Решітка</h1>
+        </header>
+        
+        <main>
+            <section class="service-times">
+                <h2>Розклад Богослужінь</h2>
+                <div id="service-times-container">
+                    <!-- Тут буде відображатися час служб -->
+                </div>
+            </section>
+            
+            <!-- Інші розділи сайту можна додати тут -->
+        </main>
+        
+        <footer>
+            <p>© 2023 Парафія села Решітка</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Масив з розкладом служб
+        const serviceSchedule = [
+            { day: "Неділя", time: "09-00 - Бого служіння" },
+            { day: "Понеділок", time: "19:00 - Вечірня" },
+            { day: "Вівторок", time: "11:00 - Уртіння, 12:00 - богослужіння, свято Володимира" },
+            { day: "Середа", time: "00:00 - " },
+            { day: "Четвер", time: "00:00 - " },
+            { day: "П'ятниця", time: "00:00 - " },
+            { day: "Субота", time: "00:00 -  " }
+        ];
+
+        // Функція для відображення розкладу
+        function displayServiceTimes() {
+            const container = document.getElementById('service-times-container');
+            
+            serviceSchedule.forEach(service => {
+                const serviceElement = document.createElement('div');
+                serviceElement.className = 'service-item';
+                serviceElement.innerHTML = `
+                    <span class="service-day">${service.day}:</span>
+                    <span class="service-time">${service.time}</span>
+                `;
+                container.appendChild(serviceElement);
+            });
+        }
+
+        // Викликаємо функцію при завантаженні сторінки
+        window.onload = displayServiceTimes;
+
+        // Функція для зміни часу служби (можна викликати з консолі)
+        function updateServiceTime(day, newTime) {
+            const service = serviceSchedule.find(s => s.day === day);
+            if (service) {
+                service.time = newTime;
+                // Оновлюємо відображення
+                document.getElementById('service-times-container').innerHTML = '';
+                displayServiceTimes();
+                console.log(`Час служби в ${day} оновлено: ${newTime}`);
+            } else {
+                console.log(`Служба в ${day} не знайдена`);
+            }
+        }
+    </script>
+</body>
+</html>
